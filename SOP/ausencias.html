@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Diretrizes Institucionais - Disciplinar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+<style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; }
+    
+    /* --- SIDEBAR --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-menu::-webkit-scrollbar { width: 4px; }
+    .nav-menu::-webkit-scrollbar-track { background: #001f42; }
+    .nav-menu::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+
+    /* --- PAINEL PRINCIPAL --- */
+    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; overflow: hidden; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; position: relative; flex-shrink: 0; }
+    .topbar::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #a12312 0%, #a12312 70%, #d4af37 70%, #d4af37 100%); }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .system-status { font-family: 'Roboto Mono', monospace; font-size: 11px; color: #a12312; background: #fee2e2; padding: 6px 12px; border: 1px solid #fca5a5; font-weight: 700; }
+    
+    .instruction-flow { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 30px; }
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .normative-header { font-size: 14px; font-weight: 700; color: #002d62; margin-bottom: 25px; border-bottom: 3px solid #002d62; padding-bottom: 10px; display: flex; justify-content: space-between; }
+    .normative-header span { background: #a12312; color: #ffffff; padding: 3px 8px; font-family: 'Roboto Mono', monospace; }
+    
+    h3 { font-size: 16px; color: #002d62; margin: 20px 0 10px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; }
+    h3::before { content: ""; display: inline-block; width: 4px; height: 16px; background: #d4af37; }
+    p { font-size: 14px; line-height: 1.7; color: #334155; margin-bottom: 15px; }
+    
+    /* MODIFICAÇÃO AQUI: Restringindo as listas ao conteúdo */
+    .instruction-flow ul { margin-left: 20px; margin-bottom: 20px; }
+    .instruction-flow li { font-size: 14px; color: #334155; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="viaturas.html" class="nav-item">Vol I: Viaturas</a>
+      <a href="comando.html" class="nav-item">Vol II: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item">Vol III: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol IV: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item">Vol V: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol VI: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item active">Vol VII: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item">Vol VIII: SISTEMA DE PUNIÇÃO</a>
+    </ul>
+
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA</div>
+  </div>
+
+  <div class="main-content">
+    <div class="topbar">
+      <div class="topbar-title">DIRETRIZ DISCIPLINAR</div>
+      <div class="system-status">🔒 PROTOCOLO ATIVO</div>
+    </div>
+    
+    <div class="instruction-flow">
+      <div class="normative-card">
+        <div class="normative-header">DISCIPLINA E AUSÊNCIAS <span>REGULAMENTO INTERNO</span></div>
+        
+        <h3>1.1 Ausências Prolongadas (LOA)</h3>
+        <p>Agentes estão autorizados a tirar ausências prolongadas. Devem informar comando sobre período e razão.</p>
+        
+        <h3>1.2 Sistema de Ações Disciplinares</h3>
+        <p>Pontos de Ações Disciplinares (PADs) de 1 a 10. Violações leves expiram em 7 dias.</p>
+        
+        <h3>1.3 Suspensão Administrativa</h3>
+        <ul>
+          <li>6 PADs: Suspensão 24h.</li>
+          <li>10 PADs: Suspensão por tempo indeterminado.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

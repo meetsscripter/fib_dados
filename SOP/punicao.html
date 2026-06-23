@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Diretrizes Institucionais - Disciplinar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; }
+    
+    /* --- SIDEBAR (Links para OUTROS arquivos/volumes) --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-menu::-webkit-scrollbar { width: 4px; }
+    .nav-menu::-webkit-scrollbar-track { background: #001f42; }
+    .nav-menu::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    /* Itens de navegação externa */
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+    
+    /* CONTENT */
+    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; overflow-y: auto; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; padding: 0 40px; }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .instruction-flow { padding: 40px; display: flex; flex-direction: column; gap: 30px; }
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    
+    h3 { font-size: 16px; color: #002d62; margin: 20px 0 10px; text-transform: uppercase; border-left: 4px solid #d4af37; padding-left: 10px; }
+    p { font-size: 14px; line-height: 1.7; color: #334155; margin-bottom: 10px; }
+    .infraction-list { margin-left: 20px; margin-bottom: 20px; list-style-type: square; }
+    .infraction-list li { font-size: 13px; color: #1e293b; margin-bottom: 5px; }
+    .badge { font-size: 10px; font-weight: 700; padding: 2px 6px; color: white; border-radius: 3px; }
+    .minor { background: #64748b; }
+    .moderate { background: #d97706; }
+    .vital { background: #b91c1c; }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA LATERAL (Aponta para OUTROS arquivos HTML do sistema) -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+  
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="viaturas.html" class="nav-item">Vol I: Viaturas</a>
+      <a href="comando.html" class="nav-item">Vol II: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item">Vol III: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol IV: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item">Vol V: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol VI: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item">Vol VII: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item active">Vol VIII: SISTEMA DE PUNIÇÃO</a>
+    </ul>
+    
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA</div>
+  </div>
+
+  <div class="main-content">
+    <div class="topbar"><div class="topbar-title">TABELA DE PUNIÇÕES E CONSEQUÊNCIAS</div></div>
+    <div class="instruction-flow">
+      <div class="normative-card">
+        <p><em>Nota: As diretrizes abaixo determinam os valores mínimos e podem divergir dependendo da severidade da situação.</em></p>
+
+        <h3><span class="badge minor">1 PONTO</span> Infrações Menores</h3>
+        <ul class="infraction-list">
+          <li>Falha em registrar relatórios no tempo correto</li>
+          <li>Uso impróprio de equipamento ou recursos do Departamento</li>
+          <li>Uniforme incorreto</li>
+          <li>Falha em obedecer a Cadeia de Comando</li>
+          <li>Falha em obedecer ao SOP</li>
+          <li>Comportamento impróprio para um agente (Menor)</li>
+        </ul>
+
+        <h3><span class="badge moderate">4 PONTOS</span> Infrações Moderadas</h3>
+        <ul class="infraction-list">
+          <li>Uso excessivo da força (Não-Letal/Letal)</li>
+          <li>Insubordinação ou falha em obedecer a uma ordem direta</li>
+          <li>Comportamento impróprio para um agente (Não-Grave/Grave)</li>
+          <li>Abuso de Autoridade</li>
+          <li>Falsificação de relatórios ou adulteração de provas</li>
+          <li>Comportamento Negligente grave</li>
+        </ul>
+
+        <h3><span class="badge vital">EXONERAÇÃO</span> Infrações Vitais</h3>
+        <ul class="infraction-list">
+          <li>Qualquer forma de corrupção do MDT</li>
+          <li>Corrupção ou Suborno</li>
+          <li>Quebra de confidencialidade (investigações)</li>
+          <li>Ser convicto de qualquer crime violento</li>
+          <li>Comportamento criminoso (Ex: roubo, agressão)</li>
+          <li>Intencionalmente distribuir qualquer equipamento policial</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

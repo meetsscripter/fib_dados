@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Diretrizes Institucionais - Cadeia de Comando</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; }
+    
+    /* --- SIDEBAR (Links para OUTROS arquivos/volumes) --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+    
+    /* --- PAINEL PRINCIPAL DE CONTEÚDO --- */
+    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; transition: filter 0.15s ease-in-out; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; user-select: none; position: relative; flex-shrink: 0; }
+    .topbar::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #a12312 0%, #a12312 70%, #d4af37 70%, #d4af37 100%); }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .system-status { font-family: 'Roboto Mono', monospace; font-size: 11px; color: #a12312; background: #fee2e2; padding: 6px 12px; border: 1px solid #fca5a5; font-weight: 700; }
+    
+    .instruction-flow { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 50px; }
+    
+    /* Cartões de Normativas */
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmMGYwZjAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4='); }
+    .normative-header { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #002d62; margin-bottom: 25px; border-bottom: 3px solid #002d62; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .normative-header span { background: #a12312; color: #ffffff; font-family: 'Roboto Mono', monospace; font-size: 11px; padding: 3px 8px; border: 1px solid #d4af37; }
+    
+    /* Estrutura Tática de Conteúdo */
+    .prose-text { font-size: 15px; line-height: 1.8; color: #2d3748; text-align: justify; margin-bottom: 30px; }
+    .prose-text p { margin-bottom: 15px; text-indent: 20px; }
+    .prose-text h3 { font-size: 16px; color: #002d62; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+    .prose-text h3::before { content: ""; display: inline-block; width: 4px; height: 16px; background: #d4af37; }
+    
+    /* --- ESTRUTURA VISUAL DA HIERARQUIA --- */
+    .hierarchy-container { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
+    
+    .hierarchy-group { display: grid; grid-template-columns: 220px 1fr; border: 1px solid #cbd5e1; border-radius: 4px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+    
+    .group-label { background: #002d62; color: #ffffff; padding: 15px; display: flex; align-items: center; font-family: 'Roboto Mono', monospace; font-size: 12px; font-weight: 700; text-transform: uppercase; border-right: 3px solid #d4af37; letter-spacing: 0.5px; }
+    
+    /* Cores variantes para diferenciar as divisões de postos */
+    .group-label.oversight { background: #4a0e17; border-right-color: #d4af37; } /* Bureau Oversight - Tom vinho institucional */
+    .group-label.supervisores { background: #0f3460; border-right-color: #cbd5e1; }
+    .group-label.oficiais { background: #1f4068; border-right-color: #cbd5e1; }
+    .group-label.trainee { background: #536162; border-right-color: #cbd5e1; }
+    
+    .group-ranks { background: #ffffff; padding: 15px 25px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+    
+    .rank-item { font-family: 'Roboto Mono', monospace; font-size: 13px; color: #1e293b; display: flex; align-items: center; gap: 10px; }
+    .rank-item::before { content: "▪"; color: #a12312; font-size: 14px; }
+    .hierarchy-group:nth-child(1) .rank-item::before { color: #d4af37; } /* Destaca os líderes com ouro */
+    
+    @media print { body { display: none !important; } }
+  </style>
+    <script>
+  // Verifica se o usuário tem o token de autenticação (definido no index.html após o login)
+  if (!sessionStorage.getItem("authenticated_fbi")) {
+    window.location.href = "../index.html"; // Redireciona de volta para a tela de login
+  }
+</script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="viaturas.html" class="nav-item">Vol I: Viaturas</a>
+      <a href="comando.html" class="nav-item active">Vol II: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item">Vol III: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol IV: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item">Vol V: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol VI: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item">Vol VII: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item">Vol VIII: SISTEMA DE PUNIÇÃO</a>
+    </ul>
+
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA<br>SETOR DE PATRIMÔNIO E LOGÍSTICA</div>
+  </div>
+
+  <div class="main-content" id="main-content">
+    <div class="topbar">
+      <div class="topbar-title">DIRETRIZ OPERACIONAL E INSTITUCIONAL</div>
+      <div class="system-status">🔒 PROTOCOLO DE SEGURANÇA INTERNA ATIVO</div>
+    </div>
+
+    <div class="instruction-flow">
+      <div class="normative-card">
+        <div class="normative-header">ESTRUTURA DIRETIVA ORGANIZACIONAL <span>CADEIA DE COMANDO</span></div>
+        
+        <div class="prose-text">
+          <h3>1.1 Atribuições e Níveis de Supervisão</h3>
+          <p>Os postos designados têm a função de determinar o nível de experiência de cada agente, definir suas atribuições e indicar seu grau de supervisão. Além disso, elas estruturam uma hierarquia organizada, conhecida como cadeia de comando.</p>
+          
+          <p>Essa cadeia permite que agentes sem função de supervisão identifiquem facilmente seus superiores diretos e assegura que dúvidas, demandas e problemas sejam solucionados no nível hierárquico mais adequado antes de serem encaminhados a instâncias superiores.</p>
+          
+          <p>Todos os integrantes, independentemente de sua patente, devem cumprir as atividades e responsabilidades relacionadas às suas funções quando designadas por seus superiores, sempre respeitando rigorosamente a cadeia de comando estabelecida.</p>
+        </div>
+
+        <div class="prose-text" style="margin-bottom: 0;">
+          <h3>1.2 Divisão Oficial de Postos e Patentes</h3>
+        </div>
+
+        <div class="hierarchy-container">
+          
+          <div class="hierarchy-group">
+            <div class="group-label oversight">Bureau Oversight</div>
+            <div class="group-ranks">
+              <div class="rank-item"><strong>Director</strong> (Diretor)</div>
+              <div class="rank-item"><strong>Assistant Director</strong> (Diretor Assistente)</div>
+              <div class="rank-item"><strong>Division Chief</strong> (Chefe de Divisão)</div>
+            </div>
+          </div>
+
+          <div class="hierarchy-group">
+            <div class="group-label supervisores">Supervisores</div>
+            <div class="group-ranks">
+              <div class="rank-item"><strong>Senior Supervisor</strong> (Supervisor Sênior)</div>
+              <div class="rank-item"><strong>Supervisor</strong></div>
+            </div>
+          </div>
+
+          <div class="hierarchy-group">
+            <div class="group-label oficiais">Oficiais</div>
+            <div class="group-ranks">
+              <div class="rank-item"><strong>Chief Inspector</strong> (Inspetor Chefe)</div>
+              <div class="rank-item"><strong>Inspector</strong> (Inspetor)</div>
+              <div class="rank-item"><strong>Special Agent</strong> (Agente Especial)</div>
+            </div>
+          </div>
+
+          <div class="hierarchy-group">
+            <div class="group-label trainee">Trainee</div>
+            <div class="group-ranks">
+              <div class="rank-item"><strong>Agent I</strong> (Agente 1° Classe)</div>
+              <div class="rank-item"><strong>Agent II</strong> (Agente 2° Classe)</div>
+              <div class="rank-item"><strong>Agent III</strong> (Agente 3° Classe)</div>
+              <div class="rank-item"><strong>Agent Trainee</strong> (FIB Academy)</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const mainContent = document.getElementById('main-content');
+    function acionarTranca() { mainContent.style.filter = 'blur(35px) grayscale(100%) brightness(80%)'; }
+    function liberarTranca() { mainContent.style.filter = 'none'; }
+    document.addEventListener('mouseleave', () => acionarTranca());
+    document.addEventListener('mouseenter', () => liberarTranca());
+    window.addEventListener('blur', () => acionarTranca());
+    window.addEventListener('focus', () => liberarTranca());
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  </script>
+</body>
+</html>

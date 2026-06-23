@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Diretrizes Institucionais - Profissionalismo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; }
+    
+    /* --- SIDEBAR (Links para OUTROS arquivos/volumes) --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+    
+    /* --- PAINEL PRINCIPAL DE CONTEÚDO --- */
+    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; transition: filter 0.15s ease-in-out; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; user-select: none; position: relative; flex-shrink: 0; }
+    .topbar::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #a12312 0%, #a12312 70%, #d4af37 70%, #d4af37 100%); }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .system-status { font-family: 'Roboto Mono', monospace; font-size: 11px; color: #a12312; background: #fee2e2; padding: 6px 12px; border: 1px solid #fca5a5; font-weight: 700; }
+    
+    .instruction-flow { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 50px; }
+    
+    /* Cartão de Conteúdo */
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmMGYwZjAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4='); }
+    .normative-header { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #002d62; margin-bottom: 25px; border-bottom: 3px solid #002d62; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .normative-header span { background: #002d62; color: #ffffff; font-family: 'Roboto Mono', monospace; font-size: 11px; padding: 3px 8px; border: 1px solid #d4af37; }
+    
+    /* Estrutura Textual */
+    .prose-text { font-size: 15px; line-height: 1.8; color: #2d3748; text-align: justify; margin-bottom: 25px; }
+    .prose-text p { text-indent: 20px; }
+    .prose-text h3 { font-size: 16px; color: #002d62; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+    .prose-text h3::before { content: ""; display: inline-block; width: 4px; height: 16px; background: #d4af37; }
+    
+    /* --- GRID DE ATRIBUTOS --- */
+    .attributes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 25px; }
+    
+    .attribute-item { background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #002d62; padding: 20px; border-radius: 0 4px 4px 0; }
+    .attribute-item.gold-accent { border-left-color: #d4af37; }
+    .attribute-item.red-accent { border-left-color: #a12312; }
+    
+    .attribute-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #002d62; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; display: flex; align-items: center; gap: 8px; }
+    .attribute-desc { font-size: 14px; line-height: 1.6; color: #334155; text-align: justify; }
+    
+    @media print { body { display: none !important; } }
+  </style>
+    <script>
+  // Verifica se o usuário tem o token de autenticação (definido no index.html após o login)
+  if (!sessionStorage.getItem("authenticated_fbi")) {
+    window.location.href = "../index.html"; // Redireciona de volta para a tela de login
+  }
+</script>
+</head>
+<body>
+
+  <!-- BARRA LATERAL (Aponta para OUTROS arquivos HTML do sistema) -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="viaturas.html" class="nav-item">Vol I: Viaturas</a>
+      <a href="comando.html" class="nav-item">Vol II: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item active">Vol III: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol IV: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item">Vol V: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol VI: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item">Vol VII: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item">Vol VIII: SISTEMA DE PUNIÇÃO</a>
+    </ul>
+
+
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA<br>SETOR DE PATRIMÔNIO E LOGÍSTICA</div>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="main-content" id="main-content">
+    <div class="topbar">
+      <div class="topbar-title">CÓDIGO DE ÉTICA E DEONTOLOGIA OPERACIONAL</div>
+      <div class="system-status">🔒 DIRETRIZ DISCIPLINAR DE CAMPO</div>
+    </div>
+
+    <div class="instruction-flow">
+      <div class="normative-card">
+        <div class="normative-header">PADRÕES COMPORTAMENTAIS REQUISITADOS <span>PROFISSIONALISMO</span></div>
+        
+        <div class="prose-text">
+          <h3>2. Atributos Fundamentais do Agente</h3>
+          <p>É esperado que os Agentes em Campo do Estado de San Andreas e integrantes do Federal Investigation Bureau demonstrem compromisso absoluto com a função pública, pautando suas ações operacionais e administrativas sob os pilares técnicos descritos a seguir:</p>
+        </div>
+
+        <!-- GRID COM OS ATRIBUTOS REQUISITADOS -->
+        <div class="attributes-grid">
+          
+          <!-- CONHECIMENTO ESPECIALIZADO -->
+          <div class="attribute-item">
+            <div class="attribute-title">▪ Conhecimento Especializado</div>
+            <div class="attribute-desc">Agentes devem se manter atualizados de suas atribuições, políticas, e leis para realizar tanto um serviço de Policiamento de inteligência quanto operacional de campo.</div>
+          </div>
+
+          <!-- COMPETÊNCIA -->
+          <div class="attribute-item gold-accent">
+            <div class="attribute-title">▪ Competência</div>
+            <div class="attribute-desc">Integrantes oficiais do Investigation Bureau são confiáveis, eficientes, e capazes de executar seus deveres. Também evitam criar desculpas no lugar de buscar soluções para problemas apresentados.</div>
+          </div>
+
+          <!-- HONESTIDADE E INTEGRIDADE -->
+          <div class="attribute-item red-accent">
+            <div class="attribute-title">▪ Honestidade e Integridade</div>
+            <div class="attribute-desc">Agentes Internos são honestos, exibem integridade, e devem sempre se manter acima dos padrões esperados. É esperado que não comprometam seus valores e os valores da instituição.</div>
+          </div>
+
+          <!-- RESPONSABILIDADE -->
+          <div class="attribute-item">
+            <div class="attribute-title">▪ Responsabilidade</div>
+            <div class="attribute-desc">Agentes Internos mantêm a si mesmos e outros responsáveis pelas coisas que falam ou fazem. Assumir a responsabilidade pelos seus erros e trabalhar para remediar suas diferenças é essencial e necessário.</div>
+          </div>
+
+          <!-- AUTORREGULAMENTAÇÃO -->
+          <div class="attribute-item gold-accent">
+            <div class="attribute-title">▪ Autorregulamentação</div>
+            <div class="attribute-desc">Agentes Internos mantêm a compostura em face de adversidades, respeitam todos os indivíduos que encontram, e demonstram alta inteligência emocional enquanto executam seus deveres.</div>
+          </div>
+
+          <!-- APARÊNCIA -->
+          <div class="attribute-item red-accent">
+            <div class="attribute-title">▪ Aparência</div>
+            <div class="attribute-desc">Agentes Internos mantêm uma aparência digna. Devem manter seus cabelos e uniformes bem cuidados, utilizam o uniforme apropriado e se comportam de maneira orgulhosa.</div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SISTEMA DE SEGURANÇA E DESFOQUE -->
+  <script>
+    const mainContent = document.getElementById('main-content');
+    function acionarTranca() { mainContent.style.filter = 'blur(35px) grayscale(100%) brightness(80%)'; }
+    function liberarTranca() { mainContent.style.filter = 'none'; }
+    document.addEventListener('mouseleave', () => acionarTranca());
+    document.addEventListener('mouseenter', () => liberarTranca());
+    window.addEventListener('blur', () => acionarTranca());
+    window.addEventListener('focus', () => liberarTranca());
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  </script>
+</body>
+</html>
+
+```
