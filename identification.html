@@ -56,6 +56,7 @@
 
       <div class="badge-data">
         <div><strong>AGENTE:</strong> <span id="val-nome">RESTRITO</span></div>
+        <div><strong>BADGE:</strong> <span id="val-badge">RESTRITO</span></div>
         <div><strong>HIERARQUIA:</strong> <span id="val-hierarquia">---</span></div>
         <div><strong>FUNÇÃO:</strong> <span id="val-admissao">---</span></div>
         <div><strong>ADMISSÃO:</strong> <span id="val-ultimo">---</span></div>
@@ -136,6 +137,7 @@
           document.body.classList.add('authenticated');
           
             document.getElementById("val-nome").innerText = dados.nome;
+            document.getElementById("val-badge").innerText = dados.nome;
             document.getElementById("val-hierarquia").innerText = dados.hierarquia || "N/A";
             document.getElementById("val-admissao").innerText = dados.admissao;
             document.getElementById("val-ultimo").innerText = formatarData(dados.ultimo);
