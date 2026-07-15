@@ -344,8 +344,8 @@
 
   </div>
 
-  <script>
-    /* ================= LOGIN WITH DISCORD CORE (DO SEU SISTEMA) ================= */
+<script>
+    /* ================= LOGIN WITH DISCORD CORE ================= */
     async function loginWithDiscord() {
       const res = await fetch('https://script.google.com/macros/s/AKfycbxrRV92GPFiss3l0iO6RYQhTurTXd4gZrmK-3rxW_esbxlBLijKhF-xrE0tmawOfIPm/exec');
       const data = await res.json();
@@ -359,7 +359,6 @@
               clearInterval(interval);
               reject();
             }
-
             const hash = popup.location.hash;
             if (hash) {
               clearInterval(interval);
@@ -379,22 +378,22 @@
       return await res.json();
     }
 
-    async function checkUserRole(token, guildId, roleId) {
+    /* NOVA FUNÇÃO PARA BUSCAR TODOS OS CARGOS */
+    async function getUserRoles(token, guildId) {
       try {
         const res = await fetch(
           `https://discord.com/api/users/@me/guilds/${guildId}/member`,
           { headers: { Authorization: `Bearer ${token}` } }
         );
-
-        if (!res.ok) return false;
+        if (!res.ok) return null;
         const member = await res.json();
-        return member.roles?.includes(roleId);
+        return member.roles || [];
       } catch {
-        return false;
+        return null;
       }
     }
 
-    /* ================= SISTEMA DE LOGIN E ANIMAÇÃO ACIONADORA ================= */
+    /* ================= SISTEMA DE LOGIN E ANIMAÇÃO ================= */
     const body = document.body;
     const btnAuth = document.getElementById("btn-auth");
     const statusText = document.getElementById("badge-status-text");
@@ -402,40 +401,44 @@
     const systemMsg = document.getElementById("system-status-msg");
 
     btnAuth.onclick = async () => {
-      // 🌟 1. ATIVA ANIMAÇÃO DE SCANNER IMEDIATAMENTE
       body.classList.add('scanning');
       statusText.innerText = "ESCANEANDO...";
       statusText.style.color = "#d4af37";
       labelStatus.innerText = "VERIFICANDO CREDENCIAIS...";
 
       try {
-        // 🌟 2. ABRE O POP-UP DE AUTENTICAÇÃO DO DISCORD
         const token = await loginWithDiscord();
         const user = await fetchDiscordUser(token);
-
         const guildId = "1316951960485888000";
-        const roleId = "1516609577821405267";
+        const roleIdNecessaria = "1516609577821405267";
 
-        const ok = await checkUserRole(token, guildId, roleId);
+        // BUSCA TODOS OS CARGOS
+        const allRoles = await getUserRoles(token, guildId);
 
-        if (!ok) {
+        if (!allRoles || !allRoles.includes(roleIdNecessaria)) {
           falhaAutenticacao("ACESSO NEGADO: PERMISSÃO INSUFICIENTE");
           return;
         }
 
-        // 🌟 3. SUCESSO: ATUALIZA ESTADOS VISUAIS E EMBLEMAS
+        // AGORA VOCÊ TEM A LISTA DE TODOS OS CARGOS EM 'allRoles'
+        console.log("IDs dos cargos do usuário:", allRoles);
+        
+        // Exemplo: Se quiser mostrar no console quantos cargos ele tem:
+        console.log("Quantidade de cargos encontrados:", allRoles.length);
+          // No seu bloco de SUCESSO do login:
+          sessionStorage.setItem("authenticated_fbi", "true");
+          sessionStorage.setItem("user_roles", JSON.stringify(allRoles)); // Salva o array de cargos
+
         body.classList.remove('scanning');
         body.classList.add('authenticated');
-        sessionStorage.setItem("authenticated_fbi", "true"); // Define que o usuário está logado
-        // Dados do Crachá Personalizados com Perfil Real
+        sessionStorage.setItem("authenticated_fbi", "true");
+        
         document.getElementById("badge-username").innerText = user.username;
         document.getElementById("badge-username").style.color = "#002d62";
         statusText.innerText = "AUTORIZADO";
         statusText.style.color = "#10b981";
-        
         btnAuth.innerText = "ACESSO PERMITIDO";
 
-        // Aplica foto do Discord
         if (user.avatar) {
           const avatarUrl = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
           const avatarImg = document.getElementById("badge-avatar-img");
@@ -444,7 +447,6 @@
           document.getElementById("badge-silhouette").style.display = "none";
         }
 
-        // Sucesso do Terminal Direito
         systemMsg.textContent = "● TODOS OS VOLUMES DESBLOQUEADOS // CONEXÃO CRIPTOGRAFADA";
         systemMsg.style.color = "#10b981";
         systemMsg.style.background = "rgba(16,185,129,0.1)";
@@ -460,39 +462,26 @@
       statusText.innerText = "NÃO AUTORIZADO";
       statusText.style.color = "#ef4444";
       labelStatus.innerText = mensagem;
-      
-      // Flash de Erro Visual no Contêiner
       const avatarBox = document.querySelector('.badge-avatar-container');
       avatarBox.style.borderColor = "#ef4444";
-      setTimeout(() => {
-        avatarBox.style.borderColor = "#d4af37";
-      }, 1000);
+      setTimeout(() => { avatarBox.style.borderColor = "#d4af37"; }, 1000);
     }
 
-    /* =========================================================================
-       NÚCLEO SISTÊMICO DE PROTEÇÃO ANTI-CAPTURE (BORRÃO TOTAL POR PERDA DE FOCO)
-       ========================================================================= */
+    /* ANTI-CAPTURE */
     function acionarTranca() {
-      // Impede borrão de interferir com os popups legítimos do navegador de login
       if (body.classList.contains('scanning')) return;
       body.classList.add('blurred');
     }
-
-    function liberarTranca() {
-      body.classList.remove('blurred');
-    }
+    function liberarTranca() { body.classList.remove('blurred'); }
 
     document.addEventListener('mouseleave', () => acionarTranca());
     document.addEventListener('mouseenter', () => liberarTranca());
     window.addEventListener('blur', () => acionarTranca());
     window.addEventListener('focus', () => liberarTranca());
-
     document.addEventListener('contextmenu', (e) => e.preventDefault());
     document.addEventListener('keydown', (e) => {
-      if (e.ctrlKey && ['p', 's', 'u'].includes(e.key.toLowerCase())) {
-        e.preventDefault();
-      }
+      if (e.ctrlKey && ['p', 's', 'u'].includes(e.key.toLowerCase())) { e.preventDefault(); }
     });
-  </script>
+</script>
 </body>
 </html>
