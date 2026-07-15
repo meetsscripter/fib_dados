@@ -142,7 +142,7 @@
 
 <script>
   // 1. Recupera os cargos do usuário logado
-  const userRoles = JSON.parse(sessionStorage.getItem("user_roles") || "[1516951626244558858, 1524807059139203153, 1516609575099437166, 1516609571580280853, 1516609569038663851, 1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786]");
+  const userRoles = JSON.parse(sessionStorage.getItem("user_roles") || "[]");
 
   // 2. Processa cada card
   document.querySelectorAll('.vehicle-card').forEach(card => {
