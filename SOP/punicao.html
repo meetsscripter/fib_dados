@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Diretrizes Institucionais - Disciplinar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/nopixel/images/3/3c/FIB_logoC.png/revision/latest?cb=20250617061152">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; min-height: 100vh; display: flex; overflow-x: hidden; }
+    
+    /* --- SIDEBAR --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-menu::-webkit-scrollbar { width: 4px; }
+    .nav-menu::-webkit-scrollbar-track { background: #001f42; }
+    .nav-menu::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+    
+    /* CONTENT */
+    .main-content { flex: 1; display: flex; flex-direction: column; background: #f8fafc; overflow-y: auto; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; padding: 0 40px; }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .instruction-flow { padding: 40px; display: flex; flex-direction: column; gap: 30px; }
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    
+    h3 { font-size: 16px; color: #002d62; margin: 20px 0 10px; text-transform: uppercase; border-left: 4px solid #d4af37; padding-left: 10px; }
+    p { font-size: 14px; line-height: 1.7; color: #334155; margin-bottom: 15px; }
+    .infraction-list { margin-left: 20px; margin-bottom: 20px; list-style-type: square; }
+    .infraction-list li { font-size: 14px; color: #1e293b; margin-bottom: 8px; }
+    .badge { font-size: 10px; font-weight: 700; padding: 2px 6px; color: white; border-radius: 3px; margin-right: 8px; }
+    .minor { background: #64748b; }
+    .moderate { background: #d97706; }
+    .vital { background: #b91c1c; }
+
+    /* --- RESPONSIVIDADE --- */
+    @media (max-width: 850px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 3px solid #d4af37; padding: 15px; }
+      .nav-menu { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 15px; }
+      .nav-item { margin-bottom: 0; width: 48%; }
+      .sidebar-footer { display: none; }
+      .main-content { overflow-y: visible; }
+      .instruction-flow { padding: 20px; }
+      .normative-card { padding: 20px; }
+    }
+</style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+  
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="comando.html" class="nav-item">Vol I: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item">Vol II: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol III: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item">Vol IV: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol V: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item">Vol VI: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item active">Vol VII: SISTEMA DE PUNIÇÃO</a>
+      <a href="cod10.html" class="nav-item">Vol VII: CÓDIGO 10</a>
+      <a href="viaturas.html" class="nav-item">Vol VIII: VIATURAS</a>
+    </ul>
+    
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA</div>
+  </div>
+
+  <div class="main-content">
+    <div class="topbar"><div class="topbar-title">DISCIPLINARY ACTIONS (DA)</div></div>
+    <div class="instruction-flow">
+      <div class="normative-card">
+        <p>As <strong>Disciplinary Actions (DA)</strong> constituem medidas administrativas aplicadas aos integrantes do Federal Investigation Bureau (FIB) em razão do descumprimento de normas, regulamentos ou deveres funcionais. As penalidades possuem caráter <strong>progressivo e cumulativo</strong>, sendo aplicadas conforme a gravidade da infração e o histórico disciplinar do agente.</p>
+        
+        <p>A progressão das penalidades ocorre de forma escalonada. Um agente que possua uma <strong>Disciplinary Action I (DA-I)</strong> poderá evoluir para uma <strong>Disciplinary Action II (DA-II)</strong> em caso de nova infração, assim como poderá alcançar a <strong>Disciplinary Action III (DA-III)</strong> diante de reincidências ou condutas de maior gravidade.</p>
+        
+        <p>A definição da <strong>Disciplinary Action</strong> cabível compete aos <strong>Chefes de Divisão</strong>, que serão responsáveis por analisar os fatos, as circunstâncias e o histórico disciplinar do agente, estabelecendo o nível da penalidade de acordo com a natureza e a gravidade da infração.</p>
+
+        <h3><span class="badge minor">DA-I</span> Disciplinary Action I</h3>
+        <ul class="infraction-list">
+          <li>Sanção financeira equivalente a <strong>2 (dois) salários</strong> do cargo ocupado.</li>
+        </ul>
+
+        <h3><span class="badge moderate">DA-II</span> Disciplinary Action II</h3>
+        <ul class="infraction-list">
+          <li>Sanção financeira equivalente a <strong>3 (dois) salários</strong> do cargo ocupado.</li>
+          <li>O agente ficará <strong>impedido de exercer funções operacionais</strong>, podendo desempenhar apenas atividades administrativas e internas até a regularização de sua situação disciplinar.</li>
+        </ul>
+
+        <h3><span class="badge vital">DA-III</span> Disciplinary Action III</h3>
+        <ul class="infraction-list">
+          <li>Sanção financeira equivalente a <strong>4 (quatro) salários</strong> do cargo ocupado.</li>
+          <li><strong>Suspensão administrativa de 10 (dez) dias</strong>, com afastamento de todas as atividades vinculadas ao Bureau.</li>
+        </ul>
+
+        <p>As sanções financeiras deverão ser quitadas junto ao Setor Administrativo dentro do prazo estabelecido pela Administração. O não cumprimento dessa obrigação poderá resultar na adoção de novas medidas disciplinares.</p>
+
+        <p>O agente que discordar da penalidade aplicada poderá interpor <strong>recurso administrativo</strong> por meio das <strong>Demandas Internas</strong>, especialmente quando entender que o grau da <strong>Disciplinary Action</strong> não corresponde à gravidade da infração ou que existam circunstâncias que justifiquem sua revisão. O recurso será analisado por um integrante do <strong>Bureau Oversight</strong> ou, na ausência deste, por um <strong>Supervisor</strong> em exercício, que avaliará a legalidade, proporcionalidade e fundamentação da penalidade aplicada, podendo mantê-la, reduzi-la ou revogá-la, conforme o caso.</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Diretrizes Institucionais - Sistema de Comando de Incidentes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/nopixel/images/3/3c/FIB_logoC.png/revision/latest?cb=20250617061152">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; min-height: 100vh; display: flex; overflow-x: hidden; }
+    
+    /* --- SIDEBAR --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+    
+    /* --- PAINEL PRINCIPAL --- */
+    .main-content { flex: 1; display: flex; flex-direction: column; background: #f8fafc; transition: filter 0.15s ease-in-out; min-height: 100vh; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; user-select: none; position: relative; flex-shrink: 0; }
+    .topbar::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #a12312 0%, #a12312 70%, #d4af37 70%, #d4af37 100%); }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .system-status { font-family: 'Roboto Mono', monospace; font-size: 11px; color: #a12312; background: #fee2e2; padding: 6px 12px; border: 1px solid #fca5a5; font-weight: 700; }
+    
+    .instruction-flow { padding: 40px; display: flex; flex-direction: column; gap: 50px; }
+    
+    /* Cartão de Conteúdo */
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgdmlld0JveD0iMCAwIDQwIDQwIj48ZyBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmMGYwZjAiIGZpbGwtb3BhY2l0eT0iMC40Ij48cGF0aCBkPSJNMCAwaDQwdjQwSDBWMHptMjAgMjBoMjB2MjBIMjBWMjB6TTAgMjBoMjB2MjBIMFYyMHoyMCAwaDIwdjIwSDIwVjB6Ii8+PC9nPjwvZz48L3N2Zz4='); }
+    .normative-header { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #002d62; margin-bottom: 25px; border-bottom: 3px solid #002d62; padding-bottom: 10px; display: flex; justify-content: space-between; align-items: center; }
+    .normative-header span { background: #002d62; color: #ffffff; font-family: 'Roboto Mono', monospace; font-size: 11px; padding: 3px 8px; border: 1px solid #d4af37; }
+    
+    /* Estrutura Textual */
+    .prose-text { font-size: 15px; line-height: 1.8; color: #2d3748; text-align: justify; margin-bottom: 20px; }
+    .prose-text p { margin-bottom: 15px; text-indent: 20px; }
+    .prose-text h3 { font-size: 16px; color: #002d62; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 10px; }
+    .prose-text h3::before { content: ""; display: inline-block; width: 4px; height: 16px; background: #d4af37; }
+    
+    /* Tabela */
+    .roles-table { width: 100%; border-collapse: collapse; margin-top: 25px; font-size: 14px; display: block; overflow-x: auto; }
+    .roles-table th { background: #001f42; color: #ffffff; font-family: 'Roboto Mono', monospace; font-size: 12px; text-transform: uppercase; text-align: left; padding: 12px; border: 1px solid #cbd5e1; }
+    .roles-table td { padding: 12px; border: 1px solid #cbd5e1; background: #ffffff; }
+    .roles-table tr:nth-child(even) td { background: #f8fafc; }
+    
+    /* Bloquinhos */
+    .ic-box { background: #f8fafc; border: 1px solid #cbd5e1; border-top: 3px solid #002d62; padding: 25px; margin-top: 20px; border-radius: 4px; }
+    .trigger-alert { background: #fffbeb; border-left: 4px solid #d4af37; padding: 15px; margin-bottom: 25px; font-size: 14px; color: #b45309; }
+
+    /* --- RESPONSIVIDADE --- */
+    @media (max-width: 850px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; height: auto; border-right: none; border-bottom: 3px solid #d4af37; }
+      .nav-menu { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 15px; }
+      .nav-item { width: 48%; margin-bottom: 0; }
+      .sidebar-footer { display: none; }
+      .topbar { padding: 0 20px; flex-direction: column; height: auto; padding: 15px; gap: 10px; }
+      .instruction-flow { padding: 20px; }
+      .normative-card { padding: 20px; }
+      .roles-table { display: block; }
+    }
+
+    @media print { body { display: none !important; } }
+</style>
+    <script>
+  // Verifica se o usuário tem o token de autenticação (definido no index.html após o login)
+  if (!sessionStorage.getItem("authenticated_fbi")) {
+    window.location.href = "../index.html"; // Redireciona de volta para a tela de login
+  }
+</script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="comando.html" class="nav-item">Vol I: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item">Vol II: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol III: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item active">Vol IV: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol V: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item">Vol VI: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item">Vol VII: SISTEMA DE PUNIÇÃO</a>
+      <a href="cod10.html" class="nav-item">Vol VII: CÓDIGO 10</a>
+      <a href="viaturas.html" class="nav-item">Vol VIII: VIATURAS</a>
+    </ul>
+
+
+
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA<br>SETOR DE PATRIMÔNIO E LOGÍSTICA</div>
+  </div>
+
+  <div class="main-content" id="main-content">
+    <div class="topbar">
+      <div class="topbar-title">PROTOCOLO DE GERENCIAMENTO DE CRISE // VOLUME III</div>
+      <div class="system-status">🔒 AMBIENTE DE ALTA RELEVÂNCIA OPERACIONAL</div>
+    </div>
+
+    <div class="instruction-flow">
+      <div class="normative-card">
+        <div class="normative-header">GERENCIAMENTO DE CENAS EM GRANDE ESCALA <span>SISTEMA DE COMANDO DE INCIDENTES (SCI)</span></div>
+        
+        <div class="trigger-alert">
+          <strong>CRITÉRIO DE ATIVAÇÃO IMEDIATA:</strong> O SCI deve ser obrigatoriamente iniciado sempre que <strong>duas (2) ou mais unidades</strong> estiverem envolvidas em uma situação, ou quando a ocorrência for classificada como de <strong>alto risco</strong>.
+        </div>
+
+        <div class="prose-text">
+          <h3>3.1 Diretrizes e Responsabilidades do Comandante</h3>
+          <p>O Sistema de Comando de Incidentes é um modelo de gerenciamento estratégico e tático desenvolvido especificamente para cenários de grande escala ou complexidade crítica.</p>
+        </div>
+
+        <div class="ic-box">
+          <h4>Atuações Obrigatórias do Comandante de Incidentes (Incident Command - IC):</h4>
+          <ul>
+            <li><strong>Assunção de Controle:</strong> Ao assumir o comando, o IC deve ordenar imediatamente ao policial primário da ocorrência que realize um briefing completo, informando o status atual da situação.</li>
+            <li><strong>Mitigação de Estresse:</strong> O Agente atuando como IC deve buscar remover a sobrecarga psicológica e o estresse dos demais agentes na cena, centralizando as decisões estratégicas.</li>
+            <li><strong>Garantia de Perímetro:</strong> Assegurar que todos os aspectos, perímetros e variáveis da ocorrência estejam propriamente isolados, seguros e controlados.</li>
+            <li><strong>Avaliação Dinâmica:</strong> Averiguar a evolução do cenário em tempo real e delegar atribuições táticas conforme a necessidade da equipe técnica.</li>
+          </ul>
+        </div>
+
+        <div class="prose-text" style="margin-top: 30px; margin-bottom: 10px;">
+          <h3>3.2 Matriz de Delegação de Papéis e Funções na Cena</h3>
+          <p>O Comandante de Incidentes possui prerrogativa para designar funções específicas para as unidades em apoio. Os papéis regulamentados incluem, mas não se limitam à seguinte matriz:</p>
+        </div>
+
+        <table class="roles-table">
+          <thead>
+            <tr>
+              <th style="width: 250px;">Papel / Função Designada</th>
+              <th>Descrição Técnica da Atribuição na Cena</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="role-tag">Negociador</span></td>
+              <td>Estabelecer canal de comunicação com suspeitos ou tomadores de refém, utilizando técnicas de desescalada.</td>
+            </tr>
+            <tr>
+              <td><span class="role-tag">Coleta de Evidências</span></td>
+              <td>Identificar e catalogar emplacamentos de veículos envolvidos, bem como realizar a identificação formal de suspeitos e vítimas.</td>
+            </tr>
+            <tr>
+              <td><span class="role-tag" style="background:#e0f2fe; color:#0369a1; border-color:#bae6fd;">Arresting Officer (AO)</span></td>
+              <td>Oficial responsável por formalizar a prisão e a custódia legal, caso haja detenções efetuadas diretamente no perímetro da cena.</td>
+            </tr>
+            <tr>
+              <td><span class="role-tag">Apreensão de Veículo</span></td>
+              <td>Coordenar a logística de remoção, catalogação interna e acionamento de guincho para os automóveis retidos na ocorrência.</td>
+            </tr>
+            <tr>
+              <td><span class="role-tag" style="background:#dcfce7; color:#15803d; border-color:#bbf7d0;">Escolta EMS</span></td>
+              <td>Garantir proteção armada e abertura de corredor tático seguro para as equipes de Atendimento Médico de Urgência.</td>
+            </tr>
+            <tr>
+              <td><span class="role-tag">Coleta de Testemunhos</span></td>
+              <td>Interrogar e registrar depoimentos preliminares de civis ou testemunhas oculares presentes no perímetro do incidente.</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const mainContent = document.getElementById('main-content');
+    function acionarTranca() { mainContent.style.filter = 'blur(35px) grayscale(100%) brightness(80%)'; }
+    function liberarTranca() { mainContent.style.filter = 'none'; }
+    document.addEventListener('mouseleave', () => acionarTranca());
+    document.addEventListener('mouseenter', () => liberarTranca());
+    window.addEventListener('blur', () => acionarTranca());
+    window.addEventListener('focus', () => liberarTranca());
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  </script>
+</body>
+</html>

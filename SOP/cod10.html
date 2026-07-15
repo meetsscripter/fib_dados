@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Manual de Códigos 10 - Comunicação</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/nopixel/images/3/3c/FIB_logoC.png/revision/latest?cb=20250617061152">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; }
+    
+    /* --- SIDEBAR --- */
+    .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; user-select: none; flex-shrink: 0; }
+    .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
+    .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
+    .sidebar-title { font-family: 'Roboto Mono', monospace; font-size: 13px; font-weight: 700; color: #ffffff; letter-spacing: 1px; }
+    .sidebar-subtitle { font-size: 10px; color: #d4af37; font-weight: 700; margin-top: 4px; }
+    
+    .nav-menu { list-style: none; margin-top: 25px; flex-grow: 1; overflow-y: auto; padding-right: 5px; }
+    .nav-menu::-webkit-scrollbar { width: 4px; }
+    .nav-menu::-webkit-scrollbar-track { background: #001f42; }
+    .nav-menu::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 2px; }
+    .nav-heading { font-size: 10px; font-family: 'Roboto Mono', monospace; color: #64748b; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+    
+    .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
+    .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
+    
+    .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; margin-top: 15px; }
+
+    /* CONTENT */
+    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; overflow-y: auto; }
+    .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; padding: 0 40px; }
+    .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
+    .instruction-flow { padding: 40px; display: flex; flex-direction: column; gap: 30px; }
+    .normative-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 40px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    
+    h3 { font-size: 16px; color: #002d62; margin: 25px 0 10px; text-transform: uppercase; border-left: 4px solid #d4af37; padding-left: 10px; display: flex; align-items: center; }
+    p { font-size: 14px; line-height: 1.7; color: #334155; margin-bottom: 10px; }
+    
+    /* Listas específicas para os códigos */
+    .code-list { list-style: none; margin-bottom: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .code-list li { font-size: 13px; color: #1e293b; padding: 5px; border-bottom: 1px solid #f1f5f9; }
+    .code-list li strong { color: #a12312; font-family: 'Roboto Mono', monospace; min-width: 60px; display: inline-block; }
+  </style>
+      <script>
+  // Verifica se o usuário tem o token de autenticação (definido no index.html após o login)
+  if (!sessionStorage.getItem("authenticated_fbi")) {
+    window.location.href = "../index.html"; // Redireciona de volta para a tela de login
+  }
+</script>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <img src="../imagem/Logo.png" alt="Logo" class="sidebar-logo" />
+      <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
+      <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
+    </div>
+    
+    <ul class="nav-menu">
+      <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
+      <a href="comando.html" class="nav-item">Vol I: Atribuições e Níveis de Supervisão</a>
+      <a href="comportamento.html" class="nav-item">Vol II: PADRÕES COMPORTAMENTAIS REQUISITADOS</a>
+      <a href="disciplinar.html" class="nav-item">Vol III: FORA DE SERVIÇO</a>
+      <a href="incidentes.html" class="nav-item">Vol IV: SISTEMA DE COMANDO DE INCIDENTES (SCI)</a>
+      <a href="ocorrencias.html" class="nav-item">Vol V: SISTEMA DE OCORRÊNCIAS</a>
+      <a href="ausencias.html" class="nav-item">Vol VI: SISTEMA DE AUSÊNCIAS</a>
+      <a href="punicao.html" class="nav-item">Vol VII: SISTEMA DE PUNIÇÃO</a>
+      <a href="cod10.html" class="nav-item active">Vol VII: CÓDIGO 10</a>
+      <a href="viaturas.html" class="nav-item">Vol VIII: VIATURAS</a>
+    </ul>
+
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA</div>
+  </div>
+
+  <div class="main-content">
+    <div class="topbar"><div class="topbar-title">TABELA DE CÓDIGOS DE COMUNICAÇÃO</div></div>
+    
+    <div class="instruction-flow">
+      <div class="normative-card">
+        
+        <h3>📣 Comunicação</h3>
+        <ul class="code-list">
+          <li><strong>10-0</strong> Cautela na cena</li>
+          <li><strong>10-1</strong> Teste de rádio</li>
+          <li><strong>10-2</strong> Negativo</li>
+          <li><strong>10-3</strong> Parar transmissões</li>
+          <li><strong>10-4</strong> Recebido / OK</li>
+          <li><strong>10-6</strong> Ocupado</li>
+          <li><strong>10-7</strong> Fora de serviço</li>
+          <li><strong>10-8</strong> Retornando ao serviço</li>
+          <li><strong>10-9</strong> Repetir mensagem</li>
+          <li><strong>10-12</strong> Aguardar</li>
+          <li><strong>10-22</strong> Desconsiderar</li>
+        </ul>
+
+        <h3>📡 Ocorrências Policiais</h3>
+        <ul class="code-list">
+          <li><strong>10-10</strong> Briga em andamento</li>
+          <li><strong>10-11</strong> Parada de trânsito</li>
+          <li><strong>10-13</strong> Tiros disparados</li>
+          <li><strong>10-13A</strong> Oficial abatido</li>
+          <li><strong>10-14</strong> Suspeito armado evadindo</li>
+          <li><strong>10-20</strong> Localização</li>
+          <li><strong>10-23</strong> Cheguei ao local</li>
+          <li><strong>10-26</strong> A caminho</li>
+          <li><strong>10-31</strong> Crime em progresso</li>
+          <li><strong>10-32</strong> Indivíduo armado</li>
+          <li><strong>10-37</strong> Atividade suspeita</li>
+        </ul>
+
+        <h3>🔎 Verificações & 💊 Crimes</h3>
+        <ul class="code-list">
+          <li><strong>10-27</strong> Verif. CNH</li>
+          <li><strong>10-28</strong> Verif. Placa</li>
+          <li><strong>10-29</strong> Verif. Mandados</li>
+        </ul>
+
+        <h3>🔎 💊 Crimes</h3>
+        <ul class="code-list">
+          <li><strong>10-31A</strong> Arrombamento</li>
+          <li><strong>10-31B</strong> Roubo</li>
+          <li><strong>10-34</strong> Venda de droga</li>
+          <li><strong>10-57</strong> Alarme</li>
+          <li><strong>10-60</strong> Roubo de veículo</li>
+        </ul>
+
+        <h3>🚨 Emergências & Patrulha</h3>
+        <ul class="code-list">
+          <li><strong>10-41</strong> Início patrulha</li>
+          <li><strong>10-42</strong> Fim patrulha</li>
+          <li><strong>10-47</strong> Pessoa ferida</li>
+          <li><strong>10-50</strong> Acidente</li>
+          <li><strong>10-52</strong> Necessário Médicos</li>
+          <li><strong>10-77</strong> Necessito de apoio</li>
+          <li><strong>10-78</strong> Apoio urgente</li>
+          <li><strong>10-80</strong> Perseguição</li>
+        </ul>
+
+        <h3>🚓 Patrulha</h3>
+        <ul class="code-list">
+          <li><strong>10-41</strong> Início patrulha</li>
+          <li><strong>10-42</strong> Fim patrulha</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

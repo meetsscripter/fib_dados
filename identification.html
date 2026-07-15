@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FIB - Autenticação Biométrica</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;700&family=Roboto:wght@300;400;700&family=Georgia&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="https://static.wikia.nocookie.net/nopixel/images/3/3c/FIB_logoC.png/revision/latest?cb=20250617061152">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #060913; font-family: 'Roboto', sans-serif; color: #e2e8f0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; overflow-x: hidden; }
+
+    .screen-blur-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(6, 9, 19, 0.95); backdrop-filter: blur(40px); z-index: 9999; display: flex; justify-content: center; align-items: center; pointer-events: none; opacity: 0; transition: opacity 0.2s; }
+    body.blurred .screen-blur-layer { opacity: 1; pointer-events: all; }
+
+    .portal-container { width: 100%; max-width: 500px; display: flex; flex-direction: column; align-items: center; transition: 0.5s; }
+    
+    .access-badge { width: 100%; background: #ffffff; border-radius: 8px; border: 2px solid #cbd5e1; padding: 25px; color: #1a1a1a; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+    .badge-top { text-align: center; border-bottom: 2px solid #002d62; padding-bottom: 10px; margin-bottom: 15px; }
+    .badge-top h1 { font-family: 'Georgia', serif; font-size: 14px; color: #002d62; }
+    
+    .badge-avatar-container { width: 140px; height: 175px; background: #020617; border: 3px double #d4af37; margin: 0 auto 15px auto; position: relative; overflow: hidden; display: flex; justify-content: center; align-items: center; }
+    .badge-avatar-container img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .scanner-line { position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: #ef4444; display: none; box-shadow: 0 0 12px #ef4444; }
+    body.scanning .scanner-line { display: block; animation: scan 2.0s infinite ease-in-out; }
+    @keyframes scan { 0% { top: 0; } 50% { top: 100%; } 100% { top: 0; } }
+
+    .badge-data { font-family: 'Roboto Mono', monospace; font-size: 11px; background: #f8fafc; padding: 10px; border: 1px solid #e2e8f0; margin-bottom: 15px; }
+    .badge-data div { display: flex; justify-content: space-between; margin-bottom: 5px; }
+    
+    .auth-btn { width: 100%; padding: 12px; background: #002d62; color: white; border: 1px solid #d4af37; cursor: pointer; text-transform: uppercase; font-weight: 700; transition: 0.2s; }
+    body.scanning .auth-btn { background: #1e293b; color: #ef4444; border-color: #ef4444; pointer-events: none; }
+    body.authenticated .auth-btn { background: #10b981; pointer-events: none; }
+
+    .directory-grid { width: 90vw; max-width: 1000px; margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; opacity: 0; pointer-events: none; transition: 0.5s; }
+    body.authenticated .portal-container { transform: translateY(-20px); }
+    body.authenticated .directory-grid { opacity: 1; pointer-events: all; }
+    .course-card { background: #0a0f24; border: 1px solid #1e293b; padding: 20px; color: #fff; text-decoration: none; border-top: 3px solid #d4af37; }
+  </style>
+</head>
+<body>
+
+  <div class="screen-blur-layer"><h2>SISTEMA CRIPTOGRAFADO</h2></div>
+
+  <div class="portal-container">
+    <div class="access-badge">
+      <div class="badge-top">
+        <h1>FEDERAL INVESTIGATION BUREAU</h1>
+        <p>U.S. DEPARTMENT OF JUSTICE</p>
+      </div>
+
+      <div class="badge-avatar-container">
+        <div class="scanner-line"></div>
+        <img id="badge-avatar-img" src="" alt="Avatar">
+      </div>
+
+      <div class="badge-data">
+        <div><strong>AGENTE:</strong> <span id="val-nome">RESTRITO</span></div>
+        <div><strong>BADGE:</strong> <span id="val-badge">RESTRITO</span></div>
+        <div><strong>HIERARQUIA:</strong> <span id="val-hierarquia">---</span></div>
+        <div><strong>FUNÇÃO:</strong> <span id="val-funcao">---</span></div>
+        <div><strong>ADMISSÃO:</strong> <span id="val-admissao">---</span></div>
+        <div><strong>SALÁRIO:</strong> <span id="val-salario">---</span></div>
+        <div><strong>HORAS TOTAIS:</strong> <span id="val-horas">---</span></div>
+        <div><strong>ÚLTIMO UPAMENTO:</strong> <span id="val-ultimo_upamento">---</span></div>
+        <div><strong>ADVERTÊNCIAS:</strong> <span id="val-advertencias">---</span></div>
+        <div><strong>AUSÊNCIAS:</strong> <span id="val-ausencias">---</span></div>
+        <div><strong>DIAS PARA PROMOÇÃO:</strong> <span id="val-tempo">---</span></div>
+        <div><strong>STATUS:</strong> <span id="badge-status-text" style="color:#ef4444;">BLOQUEADO</span></div>
+      </div>
+
+      <button class="auth-btn" id="btn-auth">Escanear Biometria (Discord)</button>
+    </div>
+  </div>
+
+
+  <script>
+    const URL_GAS_AUTH = "https://script.google.com/macros/s/AKfycbxrRV92GPFiss3l0iO6RYQhTurTXd4gZrmK-3rxW_esbxlBLijKhF-xrE0tmawOfIPm/exec";
+    const URL_GAS_DADOS = "https://script.google.com/macros/s/AKfycbxmXKI7_qVa5Ro05m9qWSdQ6meCskYdFOC0E3uR8UK1R5Vo2H9dnZAInYbMfzYe-io7/exec";
+
+    async function checkUserRole(token, guildId, roleId) {
+          try {
+            const res = await fetch(
+              `https://discord.com/api/users/@me/guilds/${guildId}/member`,
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
+
+            if (!res.ok) return false;
+            const member = await res.json();
+            return member.roles?.includes(roleId);
+          } catch {
+            return false;
+          }
+        }
+
+
+    async function loginWithDiscord() {
+      const res = await fetch(URL_GAS_AUTH);
+      const data = await res.json();
+      const popup = window.open(data.url, "DiscordLogin", "width=500,height=700");
+      return new Promise((resolve) => {
+        const interval = setInterval(() => {
+          try {
+            const hash = popup.location.hash;
+            if (hash) { clearInterval(interval); popup.close(); resolve(new URLSearchParams(hash.substring(1)).get("access_token")); }
+          } catch {}
+        }, 500);
+      });
+    }
+
+    document.getElementById("btn-auth").onclick = async () => {
+      document.body.classList.add('scanning');
+      try {
+        
+        const token = await loginWithDiscord();
+        const userRes = await fetch("https://discord.com/api/users/@me", { headers: { Authorization: `Bearer ${token}` } });
+        const user = await userRes.json();
+        
+        // Chamada para a planilha
+        const res = await fetch(`${URL_GAS_DADOS}?id=${user.id}`);
+        const dados = await res.json();
+        
+        // 🌟 Lógica de Verificação de Cargo
+        const guildId = "1316951960485888000"; // ID do seu Servidor
+        const roleId = "1516609577821405267";   // ID do Cargo Permitido
+
+        const ok = await checkUserRole(token, guildId, roleId);
+
+        if (!ok) {
+            document.getElementById("badge-status-text").innerText = "BLOQUEADO";
+            document.getElementById("badge-status-text").style.color = "#ef4444";
+          return;
+        }
+        
+        // Se passar daqui, o código continua para o estado "authenticated"
+
+        if (dados) {
+
+          document.body.classList.remove('scanning');
+          document.body.classList.add('authenticated');
+          
+            document.getElementById("val-nome").innerText = dados.nome;
+            document.getElementById("val-badge").innerText = dados.badge;
+            document.getElementById("val-hierarquia").innerText = dados.hierarquia || "N/A";
+            document.getElementById("val-funcao").innerText = dados.funcao;
+            document.getElementById("val-horas").innerText = dados.horas;
+            document.getElementById("val-salario").innerText = dados.salario;
+            document.getElementById("val-admissao").innerText = dados.admissao || "N/A";
+            document.getElementById("val-ultimo_upamento").innerText = dados.ultimo_upamento || "N/A";
+            document.getElementById("val-advertencias").innerText = dados.advertencias || "N/A";
+            document.getElementById("val-ausencias").innerText = dados.ausencias || "N/A";
+            document.getElementById("val-tempo").innerText = dados.tempo || "N/A";
+
+            document.getElementById("badge-status-text").innerText = "AUTORIZADO";
+            document.getElementById("badge-status-text").style.color = "#10b981";
+          
+          const avatar = document.getElementById("badge-avatar-img");
+          avatar.src = `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png`;
+          avatar.style.display = "block";
+        }
+      } catch (e) {
+        document.body.classList.remove('scanning');
+        alert("Erro ao validar credenciais.");
+      }
+    };
+
+    window.addEventListener('blur', () => document.body.classList.add('blurred'));
+    window.addEventListener('focus', () => document.body.classList.remove('blurred'));
+
+  </script>
+</body>
+</html>
