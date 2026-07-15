@@ -73,12 +73,11 @@
 
     @media print { body { display: none !important; } }
 </style>
+
     <script>
-  // Verifica se o usuário tem o token de autenticação (definido no index.html após o login)
-  if (!sessionStorage.getItem("authenticated_fbi")) {
-    window.location.href = "../index.html"; // Redireciona de volta para a tela de login
-  }
+  if (!sessionStorage.getItem("authenticated_fbi")) { window.location.href = "../index.html"; }
 </script>
+
 </head>
 <body>
 

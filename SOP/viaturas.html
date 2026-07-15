@@ -31,9 +31,9 @@
     .vehicle-name { font-family: 'Roboto Mono', monospace; font-size: 14px; font-weight: 700; color: #002d62; margin-bottom: 8px; text-transform: uppercase; }
     .vehicle-desc { font-size: 13px; color: #4a5568; line-height: 1.6; }
   </style>
-  <script>
-
-  </script>
+    <script>
+  if (!sessionStorage.getItem("authenticated_fbi")) { window.location.href = "../index.html"; }
+</script>
 </head>
 <body>
 
