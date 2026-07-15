@@ -65,62 +65,47 @@
       <div class="topbar-title">REGISTRO DE FROTA OPERACIONAL</div>
     </div>
 
-    <div class="vehicle-grid">
-      <!-- Exemplo de Card -->
-       <div class="vehicle-card" data-allowed-roles="1516609569038663851, 1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-      <div class="vehicle-card">
-        <img src="../Viaturas/1.png" alt="Viatura 1" class="vehicle-img">
-        <div class="vehicle-name">Dodge Charger</div>
-        <p class="vehicle-desc">Viatura utilizável a partir de <b> Agent I</b></p>
-      </div>
+<!-- Apenas uma div: o contêiner, o atributo e o conteúdo estão unidos -->
+      <div class="vehicle-card" data-allowed-roles="1516609569038663851, 1516609566169628713">
+          <img src="../Viaturas/1.png" alt="Viatura 1" class="vehicle-img">
+          <div class="vehicle-name">Dodge Charger</div>
+          <p class="vehicle-desc">Viatura utilizável a partir de <b>Agent I</b></p>  
       </div>
 
       <div class="vehicle-card" data-allowed-roles="1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-      <div class="vehicle-card">
         <img src="../Viaturas/2.png" alt="Viatura 2" class="vehicle-img">
         <div class="vehicle-name">Dodge Demon</div>
         <p class="vehicle-desc">Viatura utilizável a partir de <b>Special Agent</b></p>
       </div>
-      </div>
 
       <div class="vehicle-card" data-allowed-roles="1516951626244558858">
-      <div class="vehicle-card">
         <img src="../Viaturas/3.png" alt="Viatura 3" class="vehicle-img">
         <div class="vehicle-name">Dodge RAM TRX</div>
         <p class="vehicle-desc">Veículo de alto desempenho para perseguições e pronta resposta. Utilizado pelo <b>CNU</b>.</p>
       </div>
-      </div>
 
       <div class="vehicle-card" data-allowed-roles="1524807059139203153">
-      <div class="vehicle-card">
         <img src="../Viaturas/4.png" alt="Viatura 5" class="vehicle-img">
         <div class="vehicle-name">Ford Crown Victoria</div>
         <p class="vehicle-desc">Viatura exclusiva para <b>Agent Trainee</b> recem formados da academia</p></p>
       </div>
-      </div>
 
       <div class="vehicle-card" data-allowed-roles="1516609575099437166, 1516609571580280853, 1516609569038663851, 1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-      <div class="vehicle-card">
         <img src="../Viaturas/5.png" alt="Viatura 5" class="vehicle-img">
         <div class="vehicle-name">Ford Explorer</div>
         <p class="vehicle-desc">Viatura utilizável a partir de <b> Agent III</b></p>
       </div>
-      </div>
       
       <div class="vehicle-card" data-allowed-roles="1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-      <div class="vehicle-card">
         <img src="../Viaturas/6.png" alt="Viatura 6" class="vehicle-img">
         <div class="vehicle-name">Ford Mustang</div>
         <p class="vehicle-desc">Viatura utilizável a partir de <b>Special Agent</b></p>
       </div>
-      </div>
       
       <div class="vehicle-card" data-allowed-roles="1516951626244558858">
-      <div class="vehicle-card">
         <img src="../Viaturas/7.png" alt="Viatura 7" class="vehicle-img">
         <div class="vehicle-name">Honda NT 1100</div>
         <p class="vehicle-desc">Motocicleta exclusiva para <b>CNU</b></p>
-      </div>
       </div>
       
       <div class="vehicle-card">
@@ -130,29 +115,30 @@
       </div>
 
       <div class="vehicle-card" data-allowed-roles="1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-      <div class="vehicle-card">
         <img src="../Viaturas/9.png" alt="Viatura 8" class="vehicle-img">
         <div class="vehicle-name">Dodge Durango</div>
         <p class="vehicle-desc">Veículo usado para intervenções estratégicas sendo necessário ser no mínimo <b>Special Agent e membro do CID</b>.</p>
-      </div>
       </div>
 
     </div>
   </div>
 
 <script>
-  // 1. Recupera os cargos do usuário logado
+  // 1. Recupera os cargos do usuário
   const userRoles = JSON.parse(sessionStorage.getItem("user_roles") || "[]");
+  console.log("Cargos do usuário:", userRoles); // Verifique no F12 se isso traz os IDs
 
-  // 2. Processa cada card
   document.querySelectorAll('.vehicle-card').forEach(card => {
-    // Pega a string de IDs permitidos do card e transforma em um array
-    const allowedRoles = card.getAttribute('data-allowed-roles')?.split(',').map(id => id.trim()) || [];
-    
-    // Verifica se o usuário possui PELO MENOS UM dos cargos permitidos
-    const temAcesso = userRoles.some(role => allowedRoles.includes(role));
+    // Se o card não tiver permissão definida, assumimos que é livre
+    if (!card.hasAttribute('data-allowed-roles')) return;
 
-    // Cria a div de status
+    const allowedRoles = card.getAttribute('data-allowed-roles').split(',').map(id => id.trim());
+    
+    // Verifica intersecção: se algum cargo do usuário está na lista permitida
+    const temAcesso = userRoles.some(role => allowedRoles.includes(role));
+    
+    console.log("Card:", card.querySelector('.vehicle-name').innerText, "Acesso:", temAcesso);
+
     const statusDiv = document.createElement('div');
     statusDiv.style.textAlign = "center";
     statusDiv.style.marginTop = "10px";
@@ -170,12 +156,10 @@
       statusDiv.innerText = "✖ ACESSO NEGADO";
       statusDiv.style.color = "#991b1b";
       statusDiv.style.background = "#fee2e2";
-      // Efeito visual de bloqueado
-      card.style.opacity = "0.6";
+      card.style.opacity = "0.5";
       card.style.filter = "grayscale(1)";
     }
 
-    // Insere o status no topo do card (logo após a imagem)
     card.insertBefore(statusDiv, card.querySelector('.vehicle-name'));
   });
 </script>
