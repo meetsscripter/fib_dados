@@ -7,8 +7,6 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #f0f2f5; font-family: 'Roboto', sans-serif; color: #1a1a1a; height: 100vh; overflow: hidden; display: flex; }
-    
-    /* --- SIDEBAR --- */
     .sidebar { width: 300px; background: #002d62; border-right: 3px solid #d4af37; display: flex; flex-direction: column; justify-content: space-between; padding: 25px; flex-shrink: 0; }
     .sidebar-header { text-align: center; border-bottom: 2px solid #a12312; padding-bottom: 20px; }
     .sidebar-logo { width: 80px; height: auto; margin-bottom: 10px; }
@@ -19,19 +17,17 @@
     .nav-item { display: block; padding: 10px 12px; background: #001f42; border-left: 3px solid #d4af37; margin-bottom: 6px; font-size: 11px; font-family: 'Roboto Mono', monospace; text-transform: uppercase; color: #cbd5e1; text-decoration: none; transition: all 0.2s; }
     .nav-item.active, .nav-item:hover { border-left-color: #a12312; background: #ffffff; color: #002d62; font-weight: 700; }
     .sidebar-footer { font-size: 9px; color: #94a3b8; text-align: center; font-family: 'Roboto Mono', monospace; border-top: 1px solid #001f42; padding-top: 15px; }
-
-    /* --- CONTEÚDO --- */
-    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; transition: filter 0.15s ease-in-out; }
+    .main-content { flex: 1; height: 100vh; display: flex; flex-direction: column; background: #f8fafc; transition: filter 0.15s ease-in-out; overflow-y: auto; }
     .topbar { height: 70px; background: #ffffff; border-bottom: 1px solid #d1d5db; display: flex; align-items: center; padding: 0 40px; border-top: 6px solid #a12312; }
     .topbar-title { font-family: 'Georgia', serif; font-size: 18px; font-weight: 700; color: #002d62; }
-    
-    .vehicle-grid { padding: 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; overflow-y: auto; }
-    .vehicle-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
-    .vehicle-img { width: 100%; height: 180px; object-fit: cover; border: 1px solid #e2e8f0; border-radius: 2px; margin-bottom: 15px; }
+    .vehicle-grid { padding: 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+    .vehicle-card { background: #ffffff; border: 1px solid #c8cbd0; border-radius: 4px; padding: 15px; display: flex; flex-direction: column; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+    .vehicle-img { width: 100%; height: 160px; object-fit: cover; border-radius: 2px; margin-bottom: 15px; display: block; }
     .vehicle-name { font-family: 'Roboto Mono', monospace; font-size: 14px; font-weight: 700; color: #002d62; margin-bottom: 8px; text-transform: uppercase; }
     .vehicle-desc { font-size: 13px; color: #4a5568; line-height: 1.6; }
+    .status-badge { text-align: center; font-weight: 700; font-size: 10px; padding: 6px; border-radius: 4px; margin-bottom: 10px; text-transform: uppercase; font-family: 'Roboto Mono', monospace; }
   </style>
-    <script>
+      <script>
   if (!sessionStorage.getItem("authenticated_fbi")) { window.location.href = "../index.html"; }
 </script>
 </head>
@@ -43,7 +39,6 @@
       <div class="sidebar-title">SISTEMA DE COMPÊNDIOS</div>
       <div class="sidebar-subtitle">DIRETRIZES E MANUAIS</div>
     </div>
- 
     <ul class="nav-menu">
       <div class="nav-heading">MANUAIS DE OPERAÇÃO</div>
       <a href="comando.html" class="nav-item">Vol I: Atribuições e Níveis de Supervisão</a>
@@ -56,8 +51,7 @@
       <a href="cod10.html" class="nav-item">Vol VII: CÓDIGO 10</a>
       <a href="viaturas.html" class="nav-item active">Vol VIII: VIATURAS</a>
     </ul>
-    
-    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA<br>SETOR DE PATRIMÔNIO E LOGÍSTICA</div>
+    <div class="sidebar-footer">DOCUMENTAÇÃO TÉCNICA RESTRITA</div>
   </div>
 
   <div class="main-content" id="main-content">
@@ -65,88 +59,83 @@
       <div class="topbar-title">REGISTRO DE FROTA OPERACIONAL</div>
     </div>
 
-<!-- Apenas uma div: o contêiner, o atributo e o conteúdo estão unidos -->
-      <div class="vehicle-card" data-allowed-roles="1516609569038663851, 1516609566169628713">
-          <img src="../Viaturas/1.png" alt="Viatura 1" class="vehicle-img">
-          <div class="vehicle-name">Dodge Charger</div>
-          <p class="vehicle-desc">Viatura utilizável a partir de <b>Agent I</b></p>  
+    <div class="vehicle-grid">
+      <!-- 1. Dodge Charger -->
+      <div class="vehicle-card" data-allowed-roles="1516609569038663851, 1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
+        <img src="../Viaturas/1.png" class="vehicle-img">
+        <div class="vehicle-name">Dodge Charger</div>
+        <p class="vehicle-desc">Viatura utilizável a partir de <b>Agent I</b></p>
       </div>
 
+      <!-- 2. Dodge Demon -->
       <div class="vehicle-card" data-allowed-roles="1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-        <img src="../Viaturas/2.png" alt="Viatura 2" class="vehicle-img">
+        <img src="../Viaturas/2.png" class="vehicle-img">
         <div class="vehicle-name">Dodge Demon</div>
         <p class="vehicle-desc">Viatura utilizável a partir de <b>Special Agent</b></p>
       </div>
 
+      <!-- 3. Dodge RAM TRX -->
       <div class="vehicle-card" data-allowed-roles="1516951626244558858">
-        <img src="../Viaturas/3.png" alt="Viatura 3" class="vehicle-img">
+        <img src="../Viaturas/3.png" class="vehicle-img">
         <div class="vehicle-name">Dodge RAM TRX</div>
-        <p class="vehicle-desc">Veículo de alto desempenho para perseguições e pronta resposta. Utilizado pelo <b>CNU</b>.</p>
+        <p class="vehicle-desc">Veículo de alto desempenho para o <b>CNU</b>.</p>
       </div>
 
+      <!-- 4. Ford Crown Victoria -->
       <div class="vehicle-card" data-allowed-roles="1524807059139203153">
-        <img src="../Viaturas/4.png" alt="Viatura 5" class="vehicle-img">
+        <img src="../Viaturas/4.png" class="vehicle-img">
         <div class="vehicle-name">Ford Crown Victoria</div>
-        <p class="vehicle-desc">Viatura exclusiva para <b>Agent Trainee</b> recem formados da academia</p></p>
+        <p class="vehicle-desc">Viatura exclusiva para <b>Agent Trainee</b>.</p>
       </div>
 
+      <!-- 5. Ford Explorer -->
       <div class="vehicle-card" data-allowed-roles="1516609575099437166, 1516609571580280853, 1516609569038663851, 1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-        <img src="../Viaturas/5.png" alt="Viatura 5" class="vehicle-img">
+        <img src="../Viaturas/5.png" class="vehicle-img">
         <div class="vehicle-name">Ford Explorer</div>
-        <p class="vehicle-desc">Viatura utilizável a partir de <b> Agent III</b></p>
+        <p class="vehicle-desc">Viatura utilizável a partir de <b>Agent III</b></p>
       </div>
-      
+
+      <!-- 6. Ford Mustang -->
       <div class="vehicle-card" data-allowed-roles="1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-        <img src="../Viaturas/6.png" alt="Viatura 6" class="vehicle-img">
+        <img src="../Viaturas/6.png" class="vehicle-img">
         <div class="vehicle-name">Ford Mustang</div>
         <p class="vehicle-desc">Viatura utilizável a partir de <b>Special Agent</b></p>
       </div>
-      
+
+      <!-- 7. Honda NT 1100 -->
       <div class="vehicle-card" data-allowed-roles="1516951626244558858">
-        <img src="../Viaturas/7.png" alt="Viatura 7" class="vehicle-img">
+        <img src="../Viaturas/7.png" class="vehicle-img">
         <div class="vehicle-name">Honda NT 1100</div>
         <p class="vehicle-desc">Motocicleta exclusiva para <b>CNU</b></p>
       </div>
-      
+
+      <!-- 8. International MV Series -->
       <div class="vehicle-card">
-        <img src="../Viaturas/8.png" alt="Viatura 8" class="vehicle-img">
+        <img src="../Viaturas/8.png" class="vehicle-img">
         <div class="vehicle-name">International MV Series</div>
-        <p class="vehicle-desc">Veículo utilizado para realizar apreensões de veículos irregulares <b>sem necessidade de curso ou patente</b></p>
+        <p class="vehicle-desc">Sem necessidade de curso ou patente.</p>
       </div>
 
+      <!-- 9. Dodge Durango -->
       <div class="vehicle-card" data-allowed-roles="1516609566169628713, 1516609563397324981, 1516609560377561118, 1516609484615717045, 1516609254335975505, 1516609115642658936, 1516609038803275786">
-        <img src="../Viaturas/9.png" alt="Viatura 8" class="vehicle-img">
+        <img src="../Viaturas/9.png" class="vehicle-img">
         <div class="vehicle-name">Dodge Durango</div>
-        <p class="vehicle-desc">Veículo usado para intervenções estratégicas sendo necessário ser no mínimo <b>Special Agent e membro do CID</b>.</p>
+        <p class="vehicle-desc">Mínimo <b>Special Agent e membro do CID</b>.</p>
       </div>
-
     </div>
   </div>
 
 <script>
-  // 1. Recupera os cargos do usuário
   const userRoles = JSON.parse(sessionStorage.getItem("user_roles") || "[]");
-  console.log("Cargos do usuário:", userRoles); // Verifique no F12 se isso traz os IDs
 
   document.querySelectorAll('.vehicle-card').forEach(card => {
-    // Se o card não tiver permissão definida, assumimos que é livre
     if (!card.hasAttribute('data-allowed-roles')) return;
 
     const allowedRoles = card.getAttribute('data-allowed-roles').split(',').map(id => id.trim());
-    
-    // Verifica intersecção: se algum cargo do usuário está na lista permitida
     const temAcesso = userRoles.some(role => allowedRoles.includes(role));
-    
-    console.log("Card:", card.querySelector('.vehicle-name').innerText, "Acesso:", temAcesso);
 
     const statusDiv = document.createElement('div');
-    statusDiv.style.textAlign = "center";
-    statusDiv.style.marginTop = "10px";
-    statusDiv.style.fontWeight = "700";
-    statusDiv.style.fontSize = "11px";
-    statusDiv.style.padding = "6px";
-    statusDiv.style.borderRadius = "4px";
-    statusDiv.style.marginBottom = "10px";
+    statusDiv.className = "status-badge";
 
     if (temAcesso) {
       statusDiv.innerText = "● ACESSO LIBERADO";
@@ -159,19 +148,8 @@
       card.style.opacity = "0.5";
       card.style.filter = "grayscale(1)";
     }
-
     card.insertBefore(statusDiv, card.querySelector('.vehicle-name'));
   });
 </script>
-
-  <script>
-    const mainContent = document.getElementById('main-content');
-    function acionarTranca() { mainContent.style.filter = 'blur(35px) grayscale(100%) brightness(80%)'; }
-    function liberarTranca() { mainContent.style.filter = 'none'; }
-    document.addEventListener('mouseleave', () => acionarTranca());
-    document.addEventListener('mouseenter', () => liberarTranca());
-    window.addEventListener('blur', () => acionarTranca());
-    window.addEventListener('focus', () => liberarTranca());
-  </script>
 </body>
 </html>
