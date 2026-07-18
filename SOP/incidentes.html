@@ -67,11 +67,8 @@
 
     @media print { body { display: none !important; } }
 </style>
-    <script>
-  // Verifica se o usuário tem o token de autenticação (definido no index.html após o login)
-  if (!sessionStorage.getItem("authenticated_fbi")) {
-    window.location.href = "../index.html"; // Redireciona de volta para a tela de login
-  }
+      <script>
+  if (!sessionStorage.getItem("authenticated_fbi")) { window.location.href = "../index.html"; }
 </script>
 </head>
 <body>
@@ -122,7 +119,10 @@
         </div>
 
         <div class="ic-box">
-          <h4>Atuações Obrigatórias do Comandante de Incidentes (Incident Command - IC):</h4>
+          <h3>Sobre o Comandante de Incidentes (IC)</h3>
+          <p>O IC é uma <strong>função operacional designada</strong>, não um cargo hierárquico. Embora seja comum o oficial de maior patente assumir o posto, sua autoridade é estritamente técnica e temporária, focada na gestão da crise e na centralização de decisões estratégicas durante a ocorrência.</p>
+
+          <h4>Atuações Obrigatórias do Comandante de Incidentes (IC):</h4>
           <ul>
             <li><strong>Assunção de Controle:</strong> Ao assumir o comando, o IC deve ordenar imediatamente ao policial primário da ocorrência que realize um briefing completo, informando o status atual da situação.</li>
             <li><strong>Mitigação de Estresse:</strong> O Agente atuando como IC deve buscar remover a sobrecarga psicológica e o estresse dos demais agentes na cena, centralizando as decisões estratégicas.</li>
