@@ -134,7 +134,7 @@
           <div><strong>UPAMENTO:</strong> <span id="val-ultimo_upamento">---</span></div>
           <div><strong>AVISOS:</strong> <span id="val-advertencias">---</span></div>
           <div><strong>AUSÊNCIAS:</strong> <span id="val-ausencias">---</span></div>
-          <div><strong>PROMOÇÃO:</strong> <span id="val-tempo">---</span></div>
+          <div><strong>PROMOÇÃO:</strong> <span id="val-upamento">---</span></div>
           <div><strong>STATUS:</strong> <span id="badge-status-text" style="color:#ef4444;">BLOQUEADO</span></div>
         </div>
       </div>
@@ -211,7 +211,7 @@
             document.getElementById("val-ultimo_upamento").innerText = dados.ultimo_upamento || "N/A";
             document.getElementById("val-advertencias").innerText = dados.advertencias || "N/A";
             document.getElementById("val-ausencias").innerText = dados.ausencias || "N/A";
-            document.getElementById("val-tempo").innerText = dados.tempo || "N/A";
+            document.getElementById("val-upamento").innerText = dados.tempo || "N/A";
 
             document.getElementById("badge-status-text").innerText = "AUTORIZADO";
             document.getElementById("badge-status-text").style.color = "#10b981";
